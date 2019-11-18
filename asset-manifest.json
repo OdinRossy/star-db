@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/star-db/static/css/main.955087e7.chunk.css",
+    "main.js": "/star-db/static/js/main.22a24315.chunk.js",
+    "main.js.map": "/star-db/static/js/main.22a24315.chunk.js.map",
+    "runtime-main.js": "/star-db/static/js/runtime-main.b6f34180.js",
+    "runtime-main.js.map": "/star-db/static/js/runtime-main.b6f34180.js.map",
+    "static/js/2.bcd7d204.chunk.js": "/star-db/static/js/2.bcd7d204.chunk.js",
+    "static/js/2.bcd7d204.chunk.js.map": "/star-db/static/js/2.bcd7d204.chunk.js.map",
+    "index.html": "/star-db/index.html",
+    "precache-manifest.8f695265827aefa806ec89095493807e.js": "/star-db/precache-manifest.8f695265827aefa806ec89095493807e.js",
+    "service-worker.js": "/star-db/service-worker.js",
+    "static/css/main.955087e7.chunk.css.map": "/star-db/static/css/main.955087e7.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b6f34180.js",
+    "static/js/2.bcd7d204.chunk.js",
+    "static/css/main.955087e7.chunk.css",
+    "static/js/main.22a24315.chunk.js"
+  ]
+}
