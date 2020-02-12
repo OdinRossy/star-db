@@ -30,9 +30,11 @@ export default class RandomPlanet extends Component {
         const {planet: {id, name, population, rotationPeriod, diameter}} = this.state;
 
         const img = isNaN(id) ? 'Loading..' :
-            (<img className="planet-image"
-                  src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
-                  alt="Loading.."/>);
+            (
+                <img className="planet-image"
+                     src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
+                     alt="Loading.."/>
+            );
 
         return (
             <div className="random-planet jumbotron rounded">
@@ -55,7 +57,6 @@ export default class RandomPlanet extends Component {
                     </ul>
                 </div>
             </div>
-
         );
     }
 }
