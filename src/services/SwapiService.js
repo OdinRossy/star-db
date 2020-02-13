@@ -2,7 +2,7 @@ export default class SwapiService {
     _apiBase = 'https://swapi.co/api';
 
     async getResource(url) {
-        const response = await fetch(`${this._apiBase}${url}`, {mode: 'cors'});
+        const response = await fetch(`${this._apiBase}${url}`, {mode: 'no-cors'});
 
         if (!response.ok) {
             throw new Error(`Could not fetch ${url}. Receive ${response.status}`)
