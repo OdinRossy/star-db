@@ -2,7 +2,7 @@ export default class SwapiService {
     _apiBase = 'https://swapi.co/api';
 
     async getResource(url) {
-        const response = await fetch(`${this._apiBase}${url}`, {mode: 'no-cors'});
+        const response = await fetch(`${this._apiBase}${url}`, {mode: 'cors'});
 
         if (!response.ok) {
             throw new Error(`Could not fetch ${url}. Receive ${response.status}`)
@@ -38,6 +38,10 @@ export default class SwapiService {
     async getStarship(id) {
         const starship = await this.getResource(`/starships/${id}/`);
         return this._transformStarship(starship)
+    }
+
+    buildRandomId(min, max, plus) {
+        return Math.floor(Math.random() * max) + plus
     }
 
     _transformStarship(starship) {
