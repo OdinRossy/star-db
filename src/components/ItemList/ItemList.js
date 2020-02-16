@@ -9,53 +9,58 @@ export default class ItemList extends Component {
     swapiService = new SwapiService();
 
     state = {
-        peopleList: null,
-        peopleListLoaded: false,
-        error: false
+        itemList: null,
+        isLoaded: false,
+        hasErrors: false
     };
 
     componentDidMount() {
         this.swapiService.getAllPeople()
-            .then(peopleList => {
-                this.setState({peopleList, peopleListLoaded: true});
-                this.updateSelectedItem();
-            })
-            .catch(error => this.setState({error: true, peopleListLoaded: true}));
+            .then(this.onItemListLoaded)
+            .catch(this.onError);
     }
 
     updateSelectedItem = () => {
-        const {peopleList} = this.state;
+        const {itemList} = this.state;
 
-        if (peopleList && peopleList.length > 0) {
-            this.props.onItemSelected(peopleList[0].id)
+        if (itemList && itemList.length > 0) {
+            this.props.onItemSelected(itemList[0].id)
         }
     };
 
+    onItemListLoaded = itemList => {
+        this.setState({itemList, isLoaded: true});
+        this.updateSelectedItem();
+    };
+
+    onError = error => {
+        console.error(error);
+        this.setState({hasErrors: true, isLoaded: true})
+    };
+
     render() {
-        const {peopleList, peopleListLoaded, error} = this.state;
+        const {itemList, isLoaded, hasErrors} = this.state;
 
-        const buildItems = peopleList => {
-            return peopleList.map(person => (
-                <li key={person.id}
-                    className="list-group-item"
-                    onClick={() => this.props.onItemSelected(person.id)}
-                >{person.name}
-                </li>
-            ))
-        };
-
-        if (!peopleListLoaded) {
-            return <Spinner/>
-        }
-
-        if (error) {
-            return <ErrorIndicator/>
-        }
-
-        return (
-            <ul className="item-list list-group">
-                {buildItems(peopleList)}
-            </ul>
-        );
+        return isLoaded ?
+            hasErrors ? <ErrorIndicator/> :
+                <ItemListView
+                    itemList={itemList}
+                    onItemSelected={this.props.onItemSelected}/> : <Spinner/>
     }
 }
+
+const ItemListView = ({itemList, onItemSelected}) => {
+    const itemElements = itemList.map(item => (
+        <li key={item.id}
+            className="list-group-item"
+            onClick={() => onItemSelected(item.id)}
+        >{item.name}
+        </li>
+    ));
+
+    return (
+        <ul className="item-list list-group">
+            {itemElements}
+        </ul>
+    );
+};
