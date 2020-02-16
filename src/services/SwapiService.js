@@ -44,7 +44,7 @@ export default class SwapiService {
         return Math.floor(Math.random() * max) + plus
     }
 
-    _transformStarship(starship) {
+    _transformStarship = starship => {
         return {
             id: this._transformIdFromUrl(starship.url),
             name: starship.name,
@@ -56,19 +56,19 @@ export default class SwapiService {
             passengers: starship.passengers,
             cargoCapacity: starship.cargoCapacity,
         }
-    }
+    };
 
-    _transformPerson(person) {
+    _transformPerson = person => {
         return {
             id: this._transformIdFromUrl(person.url),
             name: person.name,
             gender: person.gender,
-            birthYear: person.birthYear,
-            eyeColor: person.eyeColor,
+            birthYear: person.birth_year,
+            eyeColor: person.eye_color,
         }
-    }
+    };
 
-    _transformPlanet(planet) {
+    _transformPlanet = planet => {
         return {
             id: this._transformIdFromUrl(planet.url),
             name: planet.name,

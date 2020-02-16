@@ -19,6 +19,9 @@ export default class RandomPlanet extends Component {
         this.updatePlanet()
     }
 
+    componentWillUnmount() {
+    }
+
     onPlanetLoaded = planet => {
         this.setState({
             planet,
@@ -42,6 +45,7 @@ export default class RandomPlanet extends Component {
     };
 
     render() {
+        console.debug('render()');
         const {planet, isLoaded, error} = this.state;
         const content = isLoaded ? error ? <ErrorIndicator/> : <PlanetView planet={planet}/> : <Spinner/>;
 
