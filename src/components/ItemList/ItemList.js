@@ -1,12 +1,9 @@
 import React, {Component} from 'react'
 import './ItemList.css'
-import SwapiService from "../../services/SwapiService";
 import Spinner from "../Spinner";
 import ErrorIndicator from "../ErrorIndicator";
 
 export default class ItemList extends Component {
-
-    swapiService = new SwapiService();
 
     state = {
         itemList: null,
@@ -15,7 +12,9 @@ export default class ItemList extends Component {
     };
 
     componentDidMount() {
-        this.swapiService.getAllPeople()
+        const {getData} = this.props;
+
+        getData()
             .then(this.onItemListLoaded)
             .catch(this.onError);
     }

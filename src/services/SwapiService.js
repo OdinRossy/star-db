@@ -1,48 +1,49 @@
 export default class SwapiService {
     _apiBase = 'https://swapi.co/api';
 
-    async getResource(url) {
+    getResource = async (url) => {
         const response = await fetch(`${this._apiBase}${url}`, {mode: 'cors'});
 
         if (!response.ok) {
             throw new Error(`Could not fetch ${url}. Receive ${response.status}`)
         }
+
         return await response.json()
     };
 
-    async getAllPeople() {
+    getAllPeople = async () => {
         const data = await this.getResource(`/people/`);
         return data.results.map(this._transformPerson)
-    }
+    };
 
-    async getPerson(id) {
+    getPerson = async id => {
         const person = await this.getResource(`/people/${id}/`);
         return this._transformPerson(person)
-    }
+    };
 
-    async getAllPlanets() {
+    getAllPlanets = async () => {
         const data = await this.getResource(`/planets/`);
         return data.results.map(this._transformPlanet);
-    }
+    };
 
-    async getPlanet(id) {
+    getPlanet = async id => {
         const data = await this.getResource(`/planets/${id}/`);
         return this._transformPlanet(data);
-    }
+    };
 
-    async getAllStarships() {
+    getAllStarships = async () => {
         const data = await this.getResource(`/starships/`);
         return data.results.map(this._transformStarship)
-    }
+    };
 
-    async getStarship(id) {
+    getStarship = async id => {
         const starship = await this.getResource(`/starships/${id}/`);
         return this._transformStarship(starship)
-    }
+    };
 
-    buildRandomId(min, max, plus) {
+    buildRandomId = (min, max, plus) => {
         return Math.floor(Math.random() * max) + plus
-    }
+    };
 
     _transformStarship = starship => {
         return {
@@ -76,9 +77,9 @@ export default class SwapiService {
             rotationPeriod: planet.rotation_period,
             diameter: planet.diameter
         }
-    }
+    };
 
-    _transformIdFromUrl(url, regExp = /\/([0-9]*)\/$/, matchGroup = 1) {
+    _transformIdFromUrl = (url, regExp = /\/([0-9]*)\/$/, matchGroup = 1) => {
         return url.match(regExp)[matchGroup]
     }
 }
