@@ -3,6 +3,7 @@ import ItemList from "../ItemList";
 import PersonDetails from "../PersonDetails";
 import ErrorIndicator from "../ErrorIndicator";
 import SwapiService from "../../services/SwapiService";
+import Row from "../Row";
 
 export default class PersonPage extends Component {
 
@@ -31,23 +32,20 @@ export default class PersonPage extends Component {
             return <ErrorIndicator/>
         }
 
-        return (
-            <div>
-                <div className="row mb2">
-                    <div className="col-md-6 mb2">
-                        <ItemList
-                            onItemSelected={this.onPersonSelected}
-                            getData={this.swapiService.getAllPeople}
-                            renderItem={({name, gender, birthYear}) => `${name} (${gender}, ${birthYear})`}
-                        />
-                    </div>
-                    <div className="col-md-6">
-                        <PersonDetails
-                            personId={selectedPersonId}
-                        />
-                    </div>
-                </div>
-            </div>
-        )
+        const itemList = (
+            <ItemList
+                onItemSelected={this.onPersonSelected}
+                getData={this.swapiService.getAllPeople}
+                renderItem={({name, gender, birthYear}) => `${name} (${gender}, ${birthYear})`}
+            />
+        );
+
+        const personDetails = (
+            <PersonDetails
+                personId={selectedPersonId}
+            />
+        );
+
+        return <Row leftElement={itemList} rightElement={personDetails}/>
     }
 }
