@@ -2,11 +2,15 @@ import React, {Component} from 'react'
 import './App.css'
 
 import Header from "../Header";
-import RandomPlanet from "../RandomPlanet";
-import PersonPage from "../PersonPage";
 import ErrorIndicator from "../ErrorIndicator";
+import Row from "../Row";
+import ErrorBoundary from "../ErrorBoundary";
+import ItemDetails from "../ItemDetails";
+import SwapiService from "../../services/SwapiService";
 
 export default class App extends Component {
+
+    swapiService = new SwapiService();
 
     state = {
         showRandomPlanet: true,
@@ -35,20 +39,47 @@ export default class App extends Component {
             return <ErrorIndicator/>
         }
 
+        const {getPerson, getStarship, getPersonImage, getStarshipImage} = this.swapiService;
+
+        const personDetails = (
+            <ItemDetails
+                itemId={11}
+                getData={getPerson}
+                getImageUrl={getPersonImage}
+            >
+                
+            </ItemDetails>
+        );
+
+        const starshipDetails = (
+            <ItemDetails
+                itemId={5}
+                getData={getStarship}
+                getImageUrl={getStarshipImage}
+            >
+
+            </ItemDetails>
+        );
+
+
         return (
             <div>
                 <Header/>
-                {
-                    showRandomPlanet ? <RandomPlanet/> : null
-                }
+                {/*{*/}
+                {/*    showRandomPlanet ? <RandomPlanet/> : null*/}
+                {/*}*/}
 
-                <button
-                    className="toggle-planet btn btn-warning btn-lg"
-                    onClick={this.toggleShowRandomPlanet}>
-                    Toggle Random Planet
-                </button>
+                {/*<button*/}
+                {/*    className="toggle-planet btn btn-warning btn-lg"*/}
+                {/*    onClick={this.toggleShowRandomPlanet}>*/}
+                {/*    Toggle Random Planet*/}
+                {/*</button>*/}
 
-                <PersonPage/>
+                {/*<PersonPage/>*/}
+
+                <ErrorBoundary>
+                    <Row leftElement={personDetails} rightElement={starshipDetails}/>
+                </ErrorBoundary>
 
             </div>
         );

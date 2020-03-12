@@ -4,7 +4,7 @@ const Row = ({leftElement, rightElement}) => {
     return (
         <div>
             <div className="row mb2">
-                <div className="col-md-6 mb2">
+                <div className="col-md-6">
                     {leftElement}
                 </div>
                 <div className="col-md-6">
