@@ -5,7 +5,7 @@ import Header from "../Header";
 import ErrorIndicator from "../ErrorIndicator";
 import Row from "../Row";
 import ErrorBoundary from "../ErrorBoundary";
-import ItemDetails from "../ItemDetails";
+import ItemDetails, {Record} from "../ItemDetails";
 import SwapiService from "../../services/SwapiService";
 
 export default class App extends Component {
@@ -47,7 +47,9 @@ export default class App extends Component {
                 getData={getPerson}
                 getImageUrl={getPersonImage}
             >
-                
+                <Record field="gender" label="Gender"/>
+                <Record field="birthYear" label="birthYear"/>
+                <Record field="eyeColor" label="Eye color"/>
             </ItemDetails>
         );
 
@@ -57,7 +59,9 @@ export default class App extends Component {
                 getData={getStarship}
                 getImageUrl={getStarshipImage}
             >
-
+                <Record field="model" label="Model"/>
+                <Record field="length" label="Length"/>
+                <Record field="costInCredits" label="Cost"/>
             </ItemDetails>
         );
 
