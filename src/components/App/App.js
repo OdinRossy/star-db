@@ -3,10 +3,10 @@ import './App.css'
 
 import Header from "../Header";
 import ErrorIndicator from "../ErrorIndicator";
-import Row from "../Row";
-import ErrorBoundary from "../ErrorBoundary";
 import ItemDetails, {Record} from "../ItemDetails";
 import SwapiService from "../../services/SwapiService";
+import PersonPage from "../PersonPage";
+import RandomPlanet from "../RandomPlanet";
 
 export default class App extends Component {
 
@@ -69,21 +69,21 @@ export default class App extends Component {
         return (
             <div>
                 <Header/>
-                {/*{*/}
-                {/*    showRandomPlanet ? <RandomPlanet/> : null*/}
-                {/*}*/}
+                {
+                    showRandomPlanet ? <RandomPlanet/> : null
+                }
 
-                {/*<button*/}
-                {/*    className="toggle-planet btn btn-warning btn-lg"*/}
-                {/*    onClick={this.toggleShowRandomPlanet}>*/}
-                {/*    Toggle Random Planet*/}
-                {/*</button>*/}
+                <button
+                    className="toggle-planet btn btn-warning btn-lg"
+                    onClick={this.toggleShowRandomPlanet}>
+                    Toggle Random Planet
+                </button>
 
-                {/*<PersonPage/>*/}
+                <PersonPage/>
 
-                <ErrorBoundary>
-                    <Row leftElement={personDetails} rightElement={starshipDetails}/>
-                </ErrorBoundary>
+                {/*<ErrorBoundary>*/}
+                {/*    <Row leftElement={personDetails} rightElement={starshipDetails}/>*/}
+                {/*</ErrorBoundary>*/}
 
             </div>
         );
