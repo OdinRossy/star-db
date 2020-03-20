@@ -14,7 +14,7 @@ export default class App extends Component {
     swapiService = new SwapiService();
 
     state = {
-        showRandomPlanet: true,
+        showRandomPlanet: false,
         hasErrors: false
     };
 
@@ -55,25 +55,19 @@ export default class App extends Component {
 
                 <ErrorBoundary>
                     <Row leftElement={(
-                        <PersonList>
-                            {({name}) => <span>{name}</span>}
-                        </PersonList>
+                        <PersonList/>
                     )} rightElement={<PersonDetails itemId={11}/>}/>
                 </ErrorBoundary>
 
                 <ErrorBoundary>
                     <Row leftElement={(
-                        <StarshipList>
-                            {({name}) => <span>{name}</span>}
-                        </StarshipList>
+                        <StarshipList/>
                     )} rightElement={<StarshipDetails itemId={5}/>}/>
                 </ErrorBoundary>
 
                 <ErrorBoundary>
                     <Row leftElement={(
-                        <PlanetList>
-                            {({name}) => <span>{name}</span>}
-                        </PlanetList>
+                        <PlanetList/>
                     )} rightElement={<PlanetDetails itemId={5}/>}/>
                 </ErrorBoundary>
 
