@@ -6,8 +6,9 @@ import ErrorIndicator from "../ErrorIndicator";
 import SwapiService from "../../services/SwapiService";
 import RandomPlanet from "../RandomPlanet";
 import {PersonDetails, PersonList, PlanetDetails, PlanetList, StarshipDetails, StarshipList} from "../sw-components";
-import ErrorBoundary from "../ErrorBoundary";
+import {SwapiServiceProvider} from '../SwapiServiceContext'
 import Row from "../Row";
+import ErrorBoundary from "../ErrorBoundary";
 
 export default class App extends Component {
 
@@ -41,37 +42,36 @@ export default class App extends Component {
         }
 
         return (
-            <div>
-                <Header/>
-                {
-                    showRandomPlanet ? <RandomPlanet/> : null
-                }
+            <ErrorBoundary>
+                <SwapiServiceProvider value={this.swapiService}>
+                    <div className="stardb-app">
+                        <Header/>
+                        {
+                            showRandomPlanet ? <RandomPlanet/> : null
+                        }
 
-                <button
-                    className="toggle-planet btn btn-warning btn-lg"
-                    onClick={this.toggleShowRandomPlanet}>
-                    Toggle Random Planet
-                </button>
+                        <button
+                            className="toggle-planet btn btn-warning btn-lg"
+                            onClick={this.toggleShowRandomPlanet}>
+                            Toggle Random Planet
+                        </button>
 
-                <ErrorBoundary>
-                    <Row leftElement={(
-                        <PersonList/>
-                    )} rightElement={<PersonDetails itemId={11}/>}/>
-                </ErrorBoundary>
 
-                <ErrorBoundary>
-                    <Row leftElement={(
-                        <StarshipList/>
-                    )} rightElement={<StarshipDetails itemId={5}/>}/>
-                </ErrorBoundary>
+                        <Row leftElement={(
+                            <PersonList/>
+                        )} rightElement={<PersonDetails itemId={11}/>}/>
 
-                <ErrorBoundary>
-                    <Row leftElement={(
-                        <PlanetList/>
-                    )} rightElement={<PlanetDetails itemId={5}/>}/>
-                </ErrorBoundary>
 
-            </div>
+                        <Row leftElement={(
+                            <StarshipList/>
+                        )} rightElement={<StarshipDetails itemId={5}/>}/>
+
+                        <Row leftElement={(
+                            <PlanetList/>
+                        )} rightElement={<PlanetDetails itemId={5}/>}/>
+                    </div>
+                </SwapiServiceProvider>
+            </ErrorBoundary>
         );
     }
 }
